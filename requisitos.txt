@@ -1,0 +1,88 @@
+Documento de Requisitos - Sistema de Biblioteca
+1. Visão Geral
+O Sistema de Gerenciamento de Biblioteca é uma aplicação web desenvolvida em Laravel que permite o controle de livros, usuários e empréstimos em uma biblioteca de pequeno a médio porte. O sistema tem como objetivo facilitar a gestão do acervo e o controle de empréstimos, oferecendo uma interface intuitiva e responsiva.
+2. Requisitos Funcionais
+2.1. Gerenciamento de Livros
+
+RF01: O sistema deve permitir cadastrar novos livros no acervo.
+RF02: O sistema deve permitir editar informações de livros já cadastrados.
+RF03: O sistema deve permitir excluir livros do acervo, desde que não estejam emprestados.
+RF04: O sistema deve permitir buscar livros por título, autor e categoria.
+RF05: O sistema deve exibir o status de disponibilidade de cada livro.
+RF06: O sistema deve manter um histórico de empréstimos de cada livro.
+
+2.2. Gerenciamento de Usuários
+
+RF07: O sistema deve permitir cadastrar novos usuários.
+RF08: O sistema deve permitir editar informações de usuários já cadastrados.
+RF09: O sistema deve permitir excluir usuários, desde que não possuam livros emprestados.
+RF10: O sistema deve permitir buscar usuários por nome e email.
+RF11: O sistema deve exibir os livros atualmente emprestados para cada usuário.
+RF12: O sistema deve permitir visualizar o histórico de empréstimos de cada usuário.
+
+2.3. Gerenciamento de Empréstimos
+
+RF13: O sistema deve permitir registrar o empréstimo de livros disponíveis.
+RF14: O sistema deve impedir o empréstimo de livros já emprestados.
+RF15: O sistema deve calcular automaticamente a data prevista para devolução.
+RF16: O sistema deve permitir registrar a devolução de livros emprestados.
+RF17: O sistema deve calcular automaticamente o valor da multa para devoluções em atraso.
+RF18: O sistema deve permitir filtrar empréstimos por status (em andamento, devolvidos, atrasados).
+RF19: O sistema deve permitir visualizar todos os detalhes de um empréstimo específico.
+
+2.4. Dashboard e Relatórios
+
+RF20: O sistema deve exibir estatísticas gerais na página inicial (dashboard).
+RF21: O sistema deve permitir gerar relatório de livros disponíveis.
+RF22: O sistema deve permitir gerar relatório de empréstimos em atraso.
+RF23: O sistema deve permitir gerar relatório de usuários com livros emprestados.
+
+3. Requisitos Não Funcionais
+3.1. Usabilidade
+
+RNF01: O sistema deve possuir interface responsiva para adaptação a diferentes dispositivos.
+RNF02: O sistema deve apresentar mensagens de feedback claras para as ações realizadas.
+RNF03: O sistema deve possuir navegação intuitiva com menu lateral.
+
+3.2. Desempenho
+
+RNF04: O sistema deve carregar as páginas em no máximo 3 segundos.
+RNF05: O sistema deve suportar até 50 usuários simultâneos.
+RNF06: O sistema deve utilizar paginação para exibição de grandes conjuntos de dados.
+
+3.3. Segurança e Integridade
+
+RNF07: O sistema deve validar todos os dados inseridos nos formulários.
+RNF08: O sistema deve impedir a exclusão de registros que comprometeriam a integridade dos dados.
+RNF09: O sistema deve garantir a consistência dos dados mesmo em caso de falhas.
+
+3.4. Tecnologia
+
+RNF10: O sistema deve ser desenvolvido em PHP utilizando o framework Laravel.
+RNF11: O sistema deve utilizar MySQL como banco de dados.
+RNF12: O sistema deve utilizar Bootstrap para o frontend.
+
+4. Regras de Negócio
+4.1. Empréstimos
+
+RN01: Um livro só pode ser emprestado se estiver disponível.
+RN02: A data prevista para devolução deve ser 14 dias após a data de empréstimo.
+RN03: A multa por atraso é calculada como R$ 1,00 por dia de atraso.
+RN04: Um livro emprestado só se torna disponível novamente após o registro da devolução.
+
+4.2. Usuários
+
+RN05: Cada usuário deve possuir um email único no sistema.
+RN06: Um usuário só pode ser excluído se não possuir empréstimos em andamento.
+
+4.3. Livros
+
+RN07: Um livro só pode ser excluído se não estiver emprestado.
+RN08: Todos os livros devem ter título, autor, ano e categoria obrigatoriamente.
+
+5. Glossário
+
+Empréstimo em andamento: Empréstimo que ainda não teve devolução registrada.
+Empréstimo em atraso: Empréstimo em andamento cuja data prevista de devolução já passou.
+Livro disponível: Livro que não está emprestado e pode ser retirado por um usuário.
+Multa: Valor financeiro cobrado por dia de atraso na devolução de um livro.

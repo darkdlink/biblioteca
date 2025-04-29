@@ -1,0 +1,249 @@
+# Plano de Testes - Sistema de Biblioteca
+
+## 1. Introdução
+
+Este documento descreve o plano de testes para o Sistema de Gerenciamento de Biblioteca. O objetivo deste plano é verificar se o sistema atende aos requisitos funcionais e não funcionais estabelecidos no documento de requisitos.
+
+## 2. Escopo dos Testes
+
+Os testes abrangem as seguintes funcionalidades do sistema:
+- Gerenciamento de Livros
+- Gerenciamento de Usuários
+- Gerenciamento de Empréstimos
+- Dashboard e Relatórios
+
+## 3. Ambiente de Teste
+
+- **Sistema Operacional**: Windows 10/11 ou Linux Ubuntu 20.04+
+- **Navegadores**: Chrome (última versão), Firefox (última versão), Edge (última versão)
+- **Banco de Dados**: MySQL 8.0+
+- **PHP**: 8.0.30+
+- **Laravel**: 9.52.20+
+
+## 4. Casos de Teste
+
+### 4.1. Gerenciamento de Livros
+
+#### CT001: Cadastro de Livro
+**Objetivo**: Verificar se é possível cadastrar um novo livro no sistema.
+**Pré-condições**: Usuário logado com permissões adequadas.
+**Passos**:
+1. Acessar o menu "Livros"
+2. Clicar no botão "Novo Livro"
+3. Preencher os campos obrigatórios (título, autor, ano, categoria)
+4. Clicar no botão "Salvar"
+**Resultado Esperado**: Livro cadastrado com sucesso e listado na página de livros.
+
+#### CT002: Edição de Livro
+**Objetivo**: Verificar se é possível editar informações de um livro.
+**Pré-condições**: Existir pelo menos um livro cadastrado.
+**Passos**:
+1. Acessar o menu "Livros"
+2. Clicar no botão de edição de um livro existente
+3. Alterar o título e o autor
+4. Clicar no botão "Salvar Alterações"
+**Resultado Esperado**: Informações do livro atualizadas com sucesso.
+
+#### CT003: Exclusão de Livro Disponível
+**Objetivo**: Verificar se é possível excluir um livro disponível.
+**Pré-condições**: Existir pelo menos um livro disponível.
+**Passos**:
+1. Acessar o menu "Livros"
+2. Clicar no botão de exclusão de um livro disponível
+3. Confirmar a exclusão
+**Resultado Esperado**: Livro excluído com sucesso.
+
+#### CT004: Tentativa de Exclusão de Livro Emprestado
+**Objetivo**: Verificar se o sistema impede a exclusão de livros emprestados.
+**Pré-condições**: Existir pelo menos um livro emprestado.
+**Passos**:
+1. Acessar o menu "Livros"
+2. Clicar no botão de exclusão de um livro emprestado
+3. Tentar confirmar a exclusão
+**Resultado Esperado**: Sistema deve exibir mensagem de erro e impedir a exclusão.
+
+#### CT005: Busca de Livros por Título
+**Objetivo**: Verificar se a busca de livros por título funciona corretamente.
+**Pré-condições**: Existirem livros cadastrados com títulos diferentes.
+**Passos**:
+1. Acessar o menu "Livros"
+2. Preencher o campo de busca com parte do título de um livro existente
+3. Clicar no botão "Filtrar"
+**Resultado Esperado**: Sistema deve exibir apenas os livros cujo título contém o termo buscado.
+
+### 4.2. Gerenciamento de Usuários
+
+#### CT006: Cadastro de Usuário
+**Objetivo**: Verificar se é possível cadastrar um novo usuário.
+**Pré-condições**: Usuário logado com permissões adequadas.
+**Passos**:
+1. Acessar o menu "Usuários"
+2. Clicar no botão "Novo Usuário"
+3. Preencher os campos obrigatórios (nome, email)
+4. Clicar no botão "Salvar"
+**Resultado Esperado**: Usuário cadastrado com sucesso e listado na página de usuários.
+
+#### CT007: Edição de Usuário
+**Objetivo**: Verificar se é possível editar informações de um usuário.
+**Pré-condições**: Existir pelo menos um usuário cadastrado.
+**Passos**:
+1. Acessar o menu "Usuários"
+2. Clicar no botão de edição de um usuário existente
+3. Alterar o nome e o email
+4. Clicar no botão "Salvar Alterações"
+**Resultado Esperado**: Informações do usuário atualizadas com sucesso.
+
+#### CT008: Tentativa de Cadastro com Email Duplicado
+**Objetivo**: Verificar se o sistema impede o cadastro de usuários com emails duplicados.
+**Pré-condições**: Existir pelo menos um usuário cadastrado.
+**Passos**:
+1. Acessar o menu "Usuários"
+2. Clicar no botão "Novo Usuário"
+3. Preencher o campo nome e usar um email já existente
+4. Clicar no botão "Salvar"
+**Resultado Esperado**: Sistema deve exibir mensagem de erro e impedir o cadastro.
+
+#### CT009: Exclusão de Usuário sem Empréstimos
+**Objetivo**: Verificar se é possível excluir um usuário sem empréstimos ativos.
+**Pré-condições**: Existir pelo menos um usuário sem empréstimos ativos.
+**Passos**:
+1. Acessar o menu "Usuários"
+2. Clicar no botão de exclusão de um usuário sem empréstimos
+3. Confirmar a exclusão
+**Resultado Esperado**: Usuário excluído com sucesso.
+
+#### CT010: Tentativa de Exclusão de Usuário com Empréstimos
+**Objetivo**: Verificar se o sistema impede a exclusão de usuários com empréstimos ativos.
+**Pré-condições**: Existir pelo menos um usuário com empréstimos ativos.
+**Passos**:
+1. Acessar o menu "Usuários"
+2. Clicar no botão de exclusão de um usuário com empréstimos
+3. Tentar confirmar a exclusão
+**Resultado Esperado**: Sistema deve exibir mensagem de erro e impedir a exclusão.
+
+### 4.3. Gerenciamento de Empréstimos
+
+#### CT011: Registro de Empréstimo
+**Objetivo**: Verificar se é possível registrar um novo empréstimo.
+**Pré-condições**: Existir pelo menos um usuário e um livro disponível.
+**Passos**:
+1. Acessar o menu "Empréstimos"
+2. Clicar no botão "Novo Empréstimo"
+3. Selecionar um usuário e um livro disponível
+4. Clicar no botão "Registrar Empréstimo"
+**Resultado Esperado**: Empréstimo registrado com sucesso, livro marcado como indisponível.
+
+#### CT012: Tentativa de Empréstimo de Livro Indisponível
+**Objetivo**: Verificar se o sistema impede o empréstimo de livros já emprestados.
+**Pré-condições**: Existir pelo menos um livro emprestado.
+**Passos**:
+1. Acessar o menu "Empréstimos"
+2. Clicar no botão "Novo Empréstimo"
+3. Selecionar um usuário e tentar selecionar um livro já emprestado
+**Resultado Esperado**: O livro já emprestado não deve estar disponível para seleção, ou o sistema deve exibir mensagem de erro.
+
+#### CT013: Registro de Devolução
+**Objetivo**: Verificar se é possível registrar a devolução de um livro.
+**Pré-condições**: Existir pelo menos um empréstimo em andamento.
+**Passos**:
+1. Acessar o menu "Empréstimos"
+2. Localizar um empréstimo em andamento
+3. Clicar no botão de devolução
+4. Confirmar a devolução
+**Resultado Esperado**: Devolução registrada com sucesso, livro marcado como disponível.
+
+#### CT014: Cálculo de Multa por Atraso
+**Objetivo**: Verificar se o sistema calcula corretamente a multa por atraso.
+**Pré-condições**: Existir pelo menos um empréstimo em atraso.
+**Passos**:
+1. Acessar o menu "Empréstimos"
+2. Localizar um empréstimo em atraso
+3. Clicar no botão de devolução
+4. Confirmar a devolução
+**Resultado Esperado**: Sistema calcula a multa corretamente (R$ 1,00 por dia de atraso) e exibe o valor.
+
+#### CT015: Filtro de Empréstimos por Status
+**Objetivo**: Verificar se o filtro de empréstimos por status funciona corretamente.
+**Pré-condições**: Existirem empréstimos em diferentes status.
+**Passos**:
+1. Acessar o menu "Empréstimos"
+2. Selecionar o status "Em Atraso" no filtro
+3. Clicar no botão "Filtrar"
+**Resultado Esperado**: Sistema exibe apenas os empréstimos em atraso.
+
+### 4.4. Dashboard e Relatórios
+
+#### CT016: Verificação do Dashboard
+**Objetivo**: Verificar se o dashboard exibe as estatísticas corretas.
+**Pré-condições**: Existirem livros, usuários e empréstimos cadastrados.
+**Passos**:
+1. Acessar a página inicial (Dashboard)
+**Resultado Esperado**: Dashboard exibe corretamente o total de livros, usuários, empréstimos em andamento e atrasados.
+
+#### CT017: Relatório de Livros Disponíveis
+**Objetivo**: Verificar se o relatório de livros disponíveis funciona corretamente.
+**Pré-condições**: Existirem livros disponíveis e indisponíveis.
+**Passos**:
+1. Acessar o menu "Relatórios"
+2. Clicar no item "Livros Disponíveis"
+**Resultado Esperado**: Sistema exibe relatório contendo apenas os livros disponíveis.
+
+#### CT018: Relatório de Empréstimos em Atraso
+**Objetivo**: Verificar se o relatório de empréstimos em atraso funciona corretamente.
+**Pré-condições**: Existirem empréstimos em atraso.
+**Passos**:
+1. Acessar o menu "Relatórios"
+2. Clicar no item "Empréstimos Atrasados"
+**Resultado Esperado**: Sistema exibe relatório contendo os empréstimos em atraso, com informações sobre usuário, livro e dias de atraso.
+
+#### CT019: Relatório de Usuários com Empréstimos
+**Objetivo**: Verificar se o relatório de usuários com empréstimos funciona corretamente.
+**Pré-condições**: Existirem usuários com empréstimos ativos.
+**Passos**:
+1. Acessar o menu "Relatórios"
+2. Clicar no item "Usuários com Empréstimos"
+**Resultado Esperado**: Sistema exibe relatório contendo os usuários que possuem empréstimos ativos, incluindo informações sobre quantos livros cada um tem emprestado.
+
+### 4.5. Validação de Formulários
+
+#### CT020: Validação de Campos Obrigatórios no Cadastro de Livro
+**Objetivo**: Verificar se o sistema valida os campos obrigatórios no formulário de cadastro de livro.
+**Pré-condições**: Usuário logado com permissões adequadas.
+**Passos**:
+1. Acessar o menu "Livros"
+2. Clicar no botão "Novo Livro"
+3. Deixar campos obrigatórios em branco
+4. Clicar no botão "Salvar"
+**Resultado Esperado**: Sistema exibe mensagens de erro para os campos obrigatórios não preenchidos.
+
+## 5. Cronograma de Testes
+
+| Fase | Descrição | Duração |
+| --- | --- | --- |
+| 1 | Preparação do ambiente de testes | 1 dia |
+| 2 | Execução dos casos de teste CT001 a CT005 | 1 dia |
+| 3 | Execução dos casos de teste CT006 a CT010 | 1 dia |
+| 4 | Execução dos casos de teste CT011 a CT015 | 1 dia |
+| 5 | Execução dos casos de teste CT016 a CT020 | 1 dia |
+| 6 | Reteste de falhas encontradas | 1 dia |
+| 7 | Elaboração do relatório final de testes | 1 dia |
+
+## 6. Recursos Necessários
+
+- 1 Testador
+- 1 Computador com acesso à internet
+- Ambiente de desenvolvimento configurado
+- Banco de dados de teste com dados pré-cadastrados
+
+## 7. Critérios de Aceitação
+
+- 100% dos casos de teste críticos (CT001, CT004, CT008, CT011, CT012, CT013, CT014) devem ser executados com sucesso
+- 90% dos demais casos de teste devem ser executados com sucesso
+- Todas as falhas críticas devem ser corrigidas
+- Não devem existir falhas que comprometam a integridade dos dados
+
+## 8. Responsabilidades
+
+- **Execução dos Testes**: Equipe de Testes
+- **Correção de Falhas**: Equipe de Desenvolvimento
+- **Homologação Final**: Gerente de Projeto
